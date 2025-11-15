@@ -1,0 +1,19 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1 class="text-center text-success mt-1">Login</h1>
+<form method="post" action="/login">
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="email" placeholder="Enter username" name="username" />
+        <label for="email">Username</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="password" />
+        <label for="pwd">Password</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}
