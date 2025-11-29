@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Trang chu</a>
+                    <a class="nav-link" href="/">Trang chu</a>
                 </li>
                 {% for c in categories %}
                 <li class="nav-item">
@@ -32,6 +32,9 @@
                     <a class="nav-link text-info" href="/register">Register</a>
                 </li>
                 {% endif %}
+                 <li class="nav-item">
+                    <a class="nav-link text-info" href="/cart">&#128722; <span class="badge bg-danger cart-counter">0</span></a>
+                </li>
             </ul>
             <form class="d-flex" method="get" action="/">
                 <input class="form-control me-2" type="text" placeholder="Tim kiem san pham" name="kw">

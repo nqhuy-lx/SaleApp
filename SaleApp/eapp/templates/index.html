@@ -12,7 +12,7 @@
                     <h4 class="card-title">{{ p.name }}</h4>
                     <p class="card-text">{{ p.price }} VNĐ</p>
                     <a href="#" class="btn btn-primary">Detail</a>
-                    <button class="btn btn-danger">Order</button>
+                    <button class="btn btn-danger" onclick="addToCart({{ p.id }}, '{{ p.name }}', {{ p.price }})">Order</button>
                 </div>
             </div>
         </div>

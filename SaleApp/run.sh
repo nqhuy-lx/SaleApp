@@ -2,7 +2,7 @@ echo "tai thu vien"
 pip install -r requirement.txt
 
 echo "tao du lieu"
-python eapp/model.py
+python eapp/models.py
 
 echo "run server"
-python -m run flash eapp/index.py
+python -m run flask eapp/index.py

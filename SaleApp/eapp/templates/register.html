@@ -4,4 +4,37 @@
 
 {% block content %}
 <h1 class="text-center text-success mt-1">Register</h1>
+
+{% if err_mgs %}
+<div class="alert alert-danger">{{ err_mgs }}</div>
+{% endif %}
+
+<form method="post" action="/register" enctype="multipart/form-data">
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" />
+        <label for="name">Enter your name</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="email" placeholder="Enter username" name="username" />
+        <label for="email">Enter username</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" />
+        <label for="pwd">Enter password</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="password" class="form-control" id="confirm" placeholder="Confirm password" name="confirm" />
+        <label for="confirm">Confirm password</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="file" class="form-control" id="avatar" name="avatar" />
+        <label for="avatar">Avatar</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+</form>
 {% endblock %}
