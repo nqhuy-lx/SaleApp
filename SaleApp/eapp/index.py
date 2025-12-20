@@ -97,5 +97,28 @@ def common_responses():
         'cart_stats': utils.stats_cart(session.get('cart'))
     }
 
+@app.route('/api/carts/<id>', methods=['put'])
+def update_to_cart(id):
+    cart = session.get('cart')
+
+    if cart and id in cart:
+        cart[id]["quantity"] = int(request.json.get("quantity"))
+
+    session['cart'] = cart
+
+    return jsonify(utils.stats_cart(cart))
+
+
+@app.route('/api/carts/<id>', methods=['delete'])
+def delete_to_cart(id):
+    cart = session.get('cart')
+
+    if cart and id in cart:
+        del cart[id]
+
+    session['cart'] = cart
+
+    return jsonify(utils.stats_cart(cart))
+
 if __name__ == '__main__':
     app.run(debug=True)
