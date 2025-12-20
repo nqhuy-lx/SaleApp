@@ -2,11 +2,11 @@ from tkinter.font import names
 
 from flask_admin.model import BaseModelView
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, Text, Enum
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, Text, Enum, DateTime
 from sqlalchemy.orm import relationship
 from enum import Enum as UserEnum
 from eapp import db, app
-
+from datetime import datetime
 
 
 class BaseModel(db.Model):
@@ -24,6 +24,7 @@ class User(BaseModel, UserMixin):
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(50), nullable=False)
     user_role = Column(Enum(UserRole), default=UserRole.USER)
+    receipts = relationship('Receipt', backref='user', lazy=True)
 
     def __str__(self):
         return self.name
@@ -40,6 +41,18 @@ class Product(BaseModel):
     price = Column(Float, default=0)
     image = Column(String(100), default='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647248722/r8sjly3st7estapvj19u.jpg')
     category_id = Column(Integer, ForeignKey(Category.id), nullable=False)
+    details = relationship('ReceiptDetails', backref='product', lazy=True)
+
+class Receipt(BaseModel):
+    user_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    created_date = Column(DateTime, default=datetime.now())
+    details = relationship('ReceiptDetails', backref='receipt', lazy=True)
+
+class ReceiptDetails(BaseModel):
+    product_id = Column(Integer, ForeignKey(Product.id), nullable=False)
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
+    quantity = Column(Integer, default=0)
+    price = Column(Float, default=0)
 
 
 

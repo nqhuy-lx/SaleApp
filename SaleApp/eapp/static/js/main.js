@@ -54,5 +54,17 @@ function deleteCart(id) {
             item.style.display = "none";
         });
     }
+}
 
+function pay(){
+    if (confirm("Bạn chắc chắn muon thanh toan?") === true) {
+        fetch("/api/pay", {
+            method: "post"
+        }).then(res => res.json()).then(data => {
+            if(data.status === 201)
+                location.reload()
+            else
+                alert("He thong co loi do: " + data.err_msg)
+        });
+    }
 }

@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, jsonify, session
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from eapp import app, dao, login, utils
 from eapp.dao import add_user
 
@@ -96,6 +96,17 @@ def common_responses():
         'categories': dao.load_categories(),
         'cart_stats': utils.stats_cart(session.get('cart'))
     }
+
+@app.route('/api/pay', methods=['POST'])
+@login_required
+def pay():
+    try:
+        dao.add_receipt(session.get('cart'))
+    except Exception as ex:
+        return jsonify({'status': 500, 'err_msg': str(ex)})
+    else:
+        del session['cart']
+        return jsonify({'status': 201})
 
 @app.route('/api/carts/<id>', methods=['put'])
 def update_to_cart(id):
